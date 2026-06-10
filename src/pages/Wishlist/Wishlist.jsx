@@ -1,13 +1,24 @@
 import { useWishlist } from "../../context/WishlistContext";
+import { useCart } from "../../context/CartContext";
 import BottomNav from "../../components/BottomNav";
 
 function Wishlist() {
-  const { wishlist } = useWishlist();
+  const {
+    wishlist,
+    removeFromWishlist,
+  } = useWishlist();
+
+  const { addToCart } = useCart();
+
+  const moveToCart = (item) => {
+    addToCart(item);
+    removeFromWishlist(item.id);
+  };
 
   return (
     <>
       <div className="container">
-        <h1>Wishlist</h1>
+        <h1>❤️ Wishlist</h1>
 
         {wishlist.length === 0 ? (
           <p>No items in wishlist</p>
@@ -15,23 +26,34 @@ function Wishlist() {
           wishlist.map((item) => (
             <div
               key={item.id}
-              className="category-card"
+              className="wishlist-card"
             >
               <img
                 src={item.image}
                 alt={item.name}
-                style={{
-                  width: "80px",
-                  height: "80px",
-                  objectFit: "cover",
-                  borderRadius: "10px",
-                  marginRight: "10px",
-                }}
               />
 
-              <div>
+              <div className="wishlist-info">
                 <h3>{item.name}</h3>
                 <p>₹{item.price}</p>
+
+                <div className="wishlist-actions">
+                  <button
+                    className="move-cart-btn"
+                    onClick={() => moveToCart(item)}
+                  >
+                    🛒 Move to Cart
+                  </button>
+
+                  <button
+                    className="remove-btn"
+                    onClick={() =>
+                      removeFromWishlist(item.id)
+                    }
+                  >
+                    🗑️ Remove
+                  </button>
+                </div>
               </div>
             </div>
           ))

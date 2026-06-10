@@ -2,35 +2,36 @@ import BottomNav from "../../components/BottomNav";
 
 function Brands() {
 
- const brands = [
-  "Lakme",
-  "Maybelline",
-  "Mamaearth",
-  "Good Vibes",
-  "NY Bae",
-  "Alps Goodness"
- ];
+  const brands = [
+    "Lakme",
+    "Maybelline",
+    "Mamaearth",
+    "Good Vibes",
+    "NY Bae",
+    "Alps Goodness"
+  ];
 
- return (
-  <>
-   <div className="container">
+  return (
+    <>
+      <div className="container">
 
-    <h1>Brands</h1>
+        <h1 className="category-page-title">
+          Brands
+        </h1>
 
-    {brands.map((brand,index)=>(
-      <div
-       key={index}
-       className="category-card"
-      >
-       {brand}
+        <div className="brands-grid">
+          {brands.map((brand,index)=>(
+            <div key={index}>
+              {brand}
+            </div>
+          ))}
+        </div>
+
       </div>
-    ))}
 
-   </div>
-
-   <BottomNav />
-  </>
- );
+      <BottomNav />
+    </>
+  );
 }
 
 export default Brands;

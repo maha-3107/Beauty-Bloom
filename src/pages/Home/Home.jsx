@@ -5,6 +5,10 @@ import BeautyAssistant from "../../components/BeautyAssistant";
 import ProductCard from "../../components/ProductCard";
 import BottomNav from "../../components/BottomNav";
 
+import HeroBanner from "../../components/HeroBanner";
+import CategoryChips from "../../components/CategoryChips";
+import FeaturedBrands from "../../components/FeaturedBrands";
+
 import products from "../../data/products";
 
 function Home() {
@@ -17,16 +21,24 @@ function Home() {
   return (
     <>
       <div className="container">
-        <h1>Beauty Bloom</h1>
+
+        <div className="beauty-header">
+          <h1>✨ Beauty Bloom 🌸</h1>
+          <p>Glow Naturally, Shine Beautifully</p>
+        </div>
 
         <SearchBar
           search={search}
           setSearch={setSearch}
         />
 
+        <HeroBanner />
+
+        <CategoryChips />
+
         <BeautyAssistant />
 
-        <h2 style={{ marginTop: "20px" }}>
+        <h2 className="section-title">
           Trending Products
         </h2>
 
@@ -38,6 +50,9 @@ function Home() {
             />
           ))}
         </div>
+
+        <FeaturedBrands />
+
       </div>
 
       <BottomNav />

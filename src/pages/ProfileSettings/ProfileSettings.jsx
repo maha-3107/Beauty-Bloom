@@ -1,22 +1,35 @@
+import BottomNav from "../../components/BottomNav";
+
 function ProfileSettings() {
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>Profile Settings</h2>
+    <>
+      <div className="container">
+        <h2>Profile Settings</h2>
 
-      <form
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "12px",
-        }}
-      >
-        <input type="text" placeholder="Full Name" />
-        <input type="email" placeholder="Email Address" />
-        <input type="tel" placeholder="Phone Number" />
+        <form className="profile-form">
+          <input
+            type="text"
+            placeholder="Full Name"
+          />
 
-        <button type="submit">Save Changes</button>
-      </form>
-    </div>
+          <input
+            type="email"
+            placeholder="Email Address"
+          />
+
+          <input
+            type="tel"
+            placeholder="Phone Number"
+          />
+
+          <button type="submit">
+            Save Changes
+          </button>
+        </form>
+      </div>
+
+      <BottomNav />
+    </>
   );
 }
 

@@ -1,25 +1,24 @@
+import BottomNav from "../../components/BottomNav";
+
 function EliteClub() {
+  return (
+    <>
+      <div className="container">
+        <h1>Beauty Bloom Elite</h1>
 
- return (
-  <div className="container">
+        <ul>
+          <li>Free Shipping</li>
+          <li>Birthday Gifts</li>
+          <li>Early Access</li>
+          <li>VIP Discounts</li>
+        </ul>
 
-   <h1>
-    Beauty Bloom Elite
-   </h1>
+        <button>Join ₹499</button>
+      </div>
 
-   <ul>
-    <li>Free Shipping</li>
-    <li>Birthday Gifts</li>
-    <li>Early Access</li>
-    <li>VIP Discounts</li>
-   </ul>
-
-   <button>
-    Join ₹499
-   </button>
-
-  </div>
- );
+      <BottomNav />
+    </>
+  );
 }
 
 export default EliteClub;

@@ -1,88 +1,98 @@
 import BottomNav from "../../components/BottomNav";
 import { useCart } from "../../context/CartContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
+  const navigate = useNavigate();
 
- const {
-  cart,
-  increaseQty,
-  decreaseQty,
-  removeFromCart
- } = useCart();
+  const {
+    cart,
+    increaseQty,
+    decreaseQty,
+    removeFromCart
+  } = useCart();
 
- const total = cart.reduce(
-  (sum,item)=>
-    sum + item.price * item.quantity,
-  0
- );
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
- return (
-  <>
-   <div className="container">
+  return (
+    <>
+      <div className="container">
+        <h1>🛒 My Cart</h1>
 
-    <h1>My Cart</h1>
+        {cart.length === 0 ? (
+          <h3>Cart Empty</h3>
+        ) : (
+          <>
+            {cart.map((item) => (
+              <div
+                className="cart-card"
+                key={item.id}
+              >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                />
 
-    {cart.length === 0 ? (
-      <h3>Cart Empty</h3>
-    ) : (
-      <>
-       {cart.map(item => (
-        <div
-         className="cart-card"
-         key={item.id}
-        >
+                <div>
+                  <h4>{item.name}</h4>
 
-         <img
-          src={item.image}
-          alt=""
-         />
+                  <p>₹{item.price}</p>
 
-         <div>
+                  <button
+                    onClick={() =>
+                      decreaseQty(item.id)
+                    }
+                  >
+                    -
+                  </button>
 
-          <h4>{item.name}</h4>
+                  {" "}
+                  {item.quantity}
+                  {" "}
 
-          <p>₹{item.price}</p>
+                  <button
+                    onClick={() =>
+                      increaseQty(item.id)
+                    }
+                  >
+                    +
+                  </button>
 
-          <button
-           onClick={() =>
-            decreaseQty(item.id)
-           }
-          >
-            -
-          </button>
+                  <br /><br />
 
-          {item.quantity}
+                  <button
+                    onClick={() =>
+                      removeFromCart(item.id)
+                    }
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            ))}
 
-          <button
-           onClick={() =>
-            increaseQty(item.id)
-           }
-          >
-            +
-          </button>
+            <div className="cart-summary">
+              <h2>Total ₹{total}</h2>
 
-          <button
-           onClick={() =>
-            removeFromCart(item.id)
-           }
-          >
-            Remove
-          </button>
+              <button
+                className="checkout-btn"
+                onClick={() =>
+                  navigate("/checkout")
+                }
+              >
+                Proceed to Checkout
+              </button>
+            </div>
+          </>
+        )}
+      </div>
 
-         </div>
-
-        </div>
-       ))}
-
-       <h2>Total ₹{total}</h2>
-      </>
-    )}
-
-   </div>
-
-   <BottomNav />
-  </>
- );
+      <BottomNav />
+    </>
+  );
 }
 
 export default Cart;

@@ -1,16 +1,12 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const WishlistContext = createContext();
 
-export const useWishlist = () =>
-  useContext(WishlistContext);
-
-export const WishlistProvider = ({
-  children,
-}) => {
-  const [wishlist, setWishlist] = useState(
-    JSON.parse(localStorage.getItem("wishlist")) || []
-  );
+export function WishlistProvider({ children }) {
+  const [wishlist, setWishlist] = useState(() => {
+    const saved = localStorage.getItem("wishlist");
+    return saved ? JSON.parse(saved) : [];
+  });
 
   useEffect(() => {
     localStorage.setItem(
@@ -31,9 +27,7 @@ export const WishlistProvider = ({
 
   const removeFromWishlist = (id) => {
     setWishlist(
-      wishlist.filter(
-        (item) => item.id !== id
-      )
+      wishlist.filter((item) => item.id !== id)
     );
   };
 
@@ -48,4 +42,7 @@ export const WishlistProvider = ({
       {children}
     </WishlistContext.Provider>
   );
-};
+}
+
+export const useWishlist = () =>
+  useContext(WishlistContext);
